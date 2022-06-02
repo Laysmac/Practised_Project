@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Hotel Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
+    <style>
+        .modal dt,
+        .modal dd {
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function verifyCustomer() {
+            var name = document.getElementById("txtName").value;
+            if (name == "") {
+                document.getElementById("msg").innerHTML = "<h3 class='text-center'>*Name cannot be Blank</h3>"
+                    .fontcolor("red");
+            } else {
+                document.getElementById("msg").innerHTML = "";
+                document.getElementById("txtName").readOnly = true;
+                document.getElementById("date").disabled = false;
+            }
+        }
+
+        function verifyDate() {
+            var date = document.getElementById("date").value;
+            if (date == "") {
+                document.getElementById("msg").innerHTML = "<h3 class='text-center'>*Date cannot be Blank</h3>"
+                    .fontcolor("red");
+            } else {
+                document.getElementById("date").readOnly = true;
+                document.getElementById("txtTotalDays").disabled = false;
+            }
+        }
+
+        function verifyDays() {
+            var days = document.getElementById("txtTotalDays").value;
+            if (isNaN(days)) {
+                document.getElementById("msg").innerHTML = "<h3 class='text-center'>*Days can Only be Number Type</h3>"
+                    .fontcolor("red");
+            } else {
+                document.getElementById("msg").innerHTML = "";
+                document.getElementById("txtTotalDays").readOnly = true;
+                document.getElementById("txtTotalPersons").disabled = false;
+            }
+        }
+
+        function verifyPersons() {
+            var persons = document.getElementById("txtTotalPersons").value;
+            if (isNaN(persons)) {
+                document.getElementById("msg").innerHTML =
+                    "<h3 class='text-center'>*Person can Only be Number Type</h3>".fontcolor("red");
+            } else {
+                document.getElementById("msg").innerHTML = "";
+                document.getElementById("txtTotalPersons").readOnly = true;
+                document.getElementById("optDeluxe").disabled = false;
+                optSuite = document.getElementById("optSuite").disabled = false;
+            }
+        }
+
+        function verifyRoom() {
+            var optDeluxe = document.getElementById("optDeluxe");
+            var optSuite = document.getElementById("optSuite");
+            if (optDeluxe.checked || optSuite.checked) {
+                document.getElementById("Adv").disabled = false;
+            }
+        }
+
+        function verifyAdv() {
+            var Adv = document.getElementById("Adv").value;
+            if (isNaN(Adv)) {
+                document.getElementById("msg").innerHTML =
+                    "<h3 class='text-center'>*Advance amount can Only be Number Type</h3>".fontcolor("red");
+            } else {
+                document.getElementById("regisBtn").style.display = "block";
+            }
+        }
+
+
+        function OrderClick() {
+            var TotalDays = parseInt(document.getElementById("txtTotalDays").value);
+            var TotalPersons = parseInt(document.getElementById("txtTotalPersons").value);
+
+
+            document.getElementById("lblName").innerHTML = document.getElementById("txtName").value;
+            document.getElementById("lblCheckInDate").innerHTML = document.getElementById("date").value;
+            document.getElementById("lblTotalDays").innerHTML = TotalDays;
+            document.getElementById("lblTotalPersons").innerHTML = TotalPersons;
+
+            var optDeluxe = document.getElementById("optDeluxe");
+            var optSuite = document.getElementById("optSuite");
+
+            var optAC = document.getElementById("optAC");
+            var optLocker = document.getElementById("optLocker");
+
+            var roomType = "";
+            var roomCost = 0;
+
+            var AmenitiesName = "";
+            var AmenitiesCost = 0;
+
+
+            if (optDeluxe.checked) {
+                roomCost = 2500;
+                roomType = optDeluxe.value;
+            }
+
+            if (optSuite.checked) {
+                roomCost = 4000;
+                roomType = optSuite.value;
+            }
+
+            if (optAC.checked) {
+                AmenitiesCost = 1000;
+                roomCost += AmenitiesCost;
+                AmenitiesName += optAC.value + "<br>";
+            }
+
+            if (optLocker.checked) {
+                AmenitiesCost = 300;
+                roomCost += AmenitiesCost;
+                AmenitiesName += optLocker.value + "<br>";
+            }
+
+
+
+            var ExtraPersons = (TotalPersons - 2) * 1000;
+
+            var Adv = parseInt(document.getElementById("Adv").value);
+            var Balance = 0;
+            var Totals = 0;
+            Totals = (roomCost + ExtraPersons) * TotalDays;
+            Balance = Totals - Adv;
+
+            document.getElementById("lblRoomType").innerHTML = roomType;
+            document.getElementById("lblAmenities").innerHTML = AmenitiesName;
+            document.getElementById("lblAdvance").innerHTML = Adv;
+            document.getElementById("lblBalance").innerHTML = Balance;
+
+        }
+    </script>
+</head>
+
+<body class="container-fluid">
+    <header>
+        <img src="https://media.kempinski.com/34358485/kibkk1_lobby_night.jpg;width=1905;height=794;mode=crop;anchor=bottomcenter;autorotate=true;quality=85;scale=both;progressive=true;encoder=freeimage;format=jpg"
+            width="100%" alt="">
+    </header>
+    <div id="msg"></div>
+    <section>
+        <div class="accordion" id="roomRegister">
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <button class="btn btn-dark w-100" data-bs-target="#customer" data-bs-toggle="collapse">Customer
+                        Info</button>
+                </div>
+                <div class="accordion-collapse show" id="customer" data-bs-parent="#roomRegister">
+                    <div class="accordion-body">
+                        <dl>
+                            <dt>Customer Name</dt>
+                            <dd>
+                                <input type="text" class="form-control" id="txtName" onblur="verifyCustomer()">
+                            </dd>
+                            <dt>Check in Date</dt>
+                            <dd>
+                                <input type="date" class="form-control" id="date" onblur="verifyDate()" disabled>
+                            </dd>
+                            <dt>Total Number of Days</dt>
+                            <dd>
+                                <input type="text" class="form-control" id="txtTotalDays" onblur="verifyDays()"
+                                    disabled>
+                            </dd>
+                            <dt>Total Number of Persons</dt>
+                            <dd>
+                                <input type="text" class="form-control" id="txtTotalPersons" onblur="verifyPersons()"
+                                    disabled>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <button class="btn btn-dark w-100" data-bs-target="#roomType" data-bs-toggle="collapse">Select Room
+                        Type</button>
+                </div>
+                <div class="accordion-collapse collapse" id="roomType" data-bs-parent="#roomRegister">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <img class="card-img-top"
+                                        src="https://media-cdn.tripadvisor.com/media/photo-s/11/36/0b/7b/deluxe-room.jpg"
+                                        height="350">
+                                </div>
+                                <div class="card-body">
+                                    <h3>2500 /-</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <input type="radio" name="typeRoom" id="optDeluxe" value="Deluxe room"
+                                        class="form-check-input" disabled onblur="verifyRoom()"> Deluxe Room
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card">
+                                    <img class="card-img-top"
+                                        src="https://image.makewebeasy.net/makeweb/0/04HXBJOw7/1HOME/Themed_Family_Suite_Bedroom_Kquincy_The_Hare_800x533.jpg"
+                                        height="350">
+                                </div>
+                                <div class="card-body">
+                                    <h3>4000 /-</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <input type="radio" name="typeRoom" id="optSuite" value="Suite room"
+                                        class="form-check-input" onblur="verifyRoom()" disabled> Suite Room
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <button class="btn btn-dark w-100" data-bs-target="#addOn" data-bs-toggle="collapse">Select
+                        Amenities</button>
+                </div>
+                <div class="accordion-collapse collapse" id="addOn" data-bs-parent="#roomRegister">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <img class="card-img-top"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFd_-G2PuB2N-Xgmag4WbhZ6-RwY3to9zeOg&usqp=CAU"
+                                        height="350">
+                                </div>
+                                <div class="card-body">
+                                    <h3>1000/-</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <input type="checkbox" id="optAC" value="A/C" class="form-check-input"> A/C
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card">
+                                    <img class="card-img-top"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYAJyCSgwPK624SXFUUNBFsPnM1wOYn1x9qg&usqp=CAU"
+                                        height="350">
+                                </div>
+                                <div class="card-body">
+                                    <h3>300 /-</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <input type="checkbox" id="optLocker" value="Locker" class="form-check-input">
+                                    Locker
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-head">
+                    <button class="btn btn-dark w-100" data-bs-target="#payAdv" data-bs-toggle="collapse">Advance
+                        Amount</button>
+                </div>
+                <div class="accordion-collapse collapse" id="payAdv" data-bs-parent="#roomRegister">
+                    <div class="accordion-body">
+                        <dl>
+                            <dt>
+                                <label for="labelAdv" class="form-label">Advance Amount</label>
+                            </dt>
+                            <dd>
+                                <input type="text" class="form-control" id="Adv" name="labelAdv" onblur="verifyAdv()"
+                                    disabled>
+                            </dd>
+                        </dl>
+                        <div class="row">
+                            <div class="col">
+                                <button class="btn btn-success w-100" data-bs-target="#billSummary"
+                                    data-bs-toggle="modal" onclick="OrderClick()" style="display: none;"
+                                    id="regisBtn">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="billSummary">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Hotel Bill Summary</h2>
+                            <button class="btn btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <dl class="row">
+                                <dt class="col-6">Customer Name</dt>
+                                <dd class="col-6" id="lblName"></dd>
+                                <dt class="col-6">Check in Date</dt>
+                                <dd class="col-6" id="lblCheckInDate"></dd>
+                                <dt class="col-6">Total Number of Days</dt>
+                                <dd class="col-6" id="lblTotalDays"></dd>
+                                <dt class="col-6">Total Number of Persons</dt>
+                                <dd class="col-6" id="lblTotalPersons"></dd>
+                                <dt class="col-6">Room Type</dt>
+                                <dd class="col-6" id="lblRoomType"></dd>
+                                <dt class="col-6">Amenities</dt>
+                                <dd class="col-6" id="lblAmenities"></dd>
+                                <dt class="col-6">Advance Amount</dt>
+                                <dd class="col-6" id="lblAdvance"></dd>
+                                <dt class="col-6">Balance Amount</dt>
+                                <dd class="col-6" id="lblBalance"></dd>
+                            </dl>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

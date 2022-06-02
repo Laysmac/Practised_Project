@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>BMI Calculator</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <script>
+        function verifyAge() {
+            var age = document.getElementById("txtAge").value;
+            if (isNaN(age)) {
+                document.getElementById("paragraph-result").innerHTML = `<h2>Please Enter Age Number</h2>`.fontcolor(
+                    "red");
+            } else {
+                if (age >= 2 && age <= 120) {
+                    document.getElementById("txtHeight").disabled = false;
+                    document.getElementById("txtAge").readOnly = true;
+                    document.getElementById("checkMale").focus();
+                } else {
+                    document.getElementById("paragraph-result").innerHTML = `<h2>Enter Age between 2- 120</h2>`
+                        .fontcolor("red");
+                }
+            }
+        }
+
+        function verifyHeight() {
+            var height = document.getElementById("txtHeight").value;
+
+            if (isNaN(height)) {
+                document.getElementById("paragraph-result").innerHTML = `<h2>Please Enter Height Number</h2>`.fontcolor(
+                    "red");
+            } else {
+                document.getElementById("txtWeight").disabled = false;
+                document.getElementById("txtHeight").readOnly = true;
+                document.getElementById("txtWeight").focus();
+            }
+        }
+
+
+        function verifyWeight() {
+            var weight = document.getElementById("txtWeight").value;
+
+            if (isNaN(weight)) {
+                document.getElementById("paragraph-result").innerHTML = `<h2>Please Enter Weight Number</h2>`.fontcolor(
+                    "red");
+            } else {
+                document.getElementById("txtWeight").readOnly = true;
+                document.getElementById("btnCal").disabled = false;
+            }
+        }
+
+
+        function bodyType(bmi) {
+            var div = document.getElementById("pic");
+            var img = document.createElement("img");
+            img.className = "w-100";
+            img.height = "300";
+
+            bmi = Math.round(bmi);
+            var type = "";
+            if (bmi < 18.5) {
+                type = "Underweight";
+                img.src = "https://toonclips.com/600/cartoon-skinny-98-pound-guy-in-boxers-by-toonaday-56494.jpg";
+            } else if (bmi >= 18.5 && bmi <= 24.9) {
+                type = "Normal Weight";
+                img.src =
+                    "https://thumbs.dreamstime.com/b/young-man-white-shirt-normal-body-build-comic-cartoon-illustration-diet-nutrition-weight-loss-health-good-h-79246676.jpg";
+            } else if (bmi >= 25 && bmi <= 29.9) {
+                type = "Overweight";
+                img.src = "https://i.pinimg.com/originals/08/e9/29/08e9293c8c4d26440d22b7988f6f628c.jpg";
+            } else {
+                type = "Obese";
+                img.src = "https://p7.hiclipart.com/preview/44/555/736/fat-cartoon-man-cute-fat-man.jpg";
+            }
+
+            document.getElementById("paragraph-result").innerHTML =
+                ` <h5 class="bg-success text-white p-3">Your BMI = ${bmi}<br> Your Body is ${type}.</h5>`;
+            div.appendChild(img);
+
+
+
+        }
+
+        function clearAll() {
+            document.getElementById("paragraph-result").innerHTML = "";
+            document.getElementById("txtAge").value = "";
+            document.getElementById("txtAge").readOnly = false;
+            document.getElementById("txtHeight").disabled = true;
+
+            document.getElementById("txtHeight").value = "";
+            document.getElementById("txtHeight").readOnly = false;
+
+            document.getElementById("txtWeight").disabled = true;
+            document.getElementById("txtWeight").value = "";
+            document.getElementById("txtWeight").readOnly = false;
+
+        }
+
+        function calculateClick() {
+            var weightCal = parseInt(document.getElementById("txtWeight").value);
+            var heightCal = parseInt(document.getElementById("txtHeight").value);
+            var bmi = weightCal / Math.pow((heightCal / 100), 2);
+            bodyType(bmi);
+        }
+    </script>
+</head>
+
+<body class="container">
+    <h2 class="text-center p-3 bg-light text-primary">BMI Calculator</h2>
+    <div class="d-flex justify-content-center align-items-center row" style="height:500px;">
+        <div class="border col-4">
+            <nav>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a href="#USUnits" data-bs-toggle="tab" class="nav-link">US Units</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#MetricUnits" data-bs-toggle="tab" class="nav-link">Metric Units</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#OtherUnits" data-bs-toggle="tab" class="nav-link">Other Units</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="tab-content bg-light">
+                <div class="tab-pane p-3" id="USUnits">
+                    <h5>No Data Display</h5>
+                </div>
+                <div class="tab-pane active p-3" id="MetricUnits">
+
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="age">Age</label>
+                            <input type="text" name="age" id="txtAge" onblur="verifyAge()">
+                            <span> age: 2-120</span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="form-check-inline">
+                                <label for="gender" class="form-check-label">Gender</label>
+                                <input type="radio" class="form-check-input" name="gender" id="checkMale" value="male"
+                                    checked> Male
+                                <input type="radio" class="form-check-input" name="gender" id="checkFemale"
+                                    value="female"> Female
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col input-group">
+                            <label for="height" class="input-group-text">Height</label>
+                            <input type="text" class="form-control" name="height" id="txtHeight" onblur="verifyHeight()"
+                                disabled>
+                            <span class="input-group-text">cm</span>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col input-group">
+                            <label for="weight" class="input-group-text">Weight</label>
+                            <input type="text" class="form-control" name="weight" id="txtWeight" onblur="verifyWeight()"
+                                disabled>
+                            <span class="input-group-text">kg</span>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-success me-2" id="btnCal" onclick="calculateClick()"
+                            disabled>Calculate</button>
+                        <button class="btn btn-secondary" id="btnClear" onclick="clearAll()">Clear</button>
+                    </div>
+
+                </div>
+                <div class="tab-pane p-3" id="OtherUnits">
+                    <h5>No Data Display</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-4" id="show">
+            <div id="paragraph-result" class="text-center"></div>
+            <div id="pic"></div>
+        </div>
+    </div>
+
+
+
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

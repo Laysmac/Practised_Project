@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Pin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script>
+        var i = 0;
+
+        function verifyPIN() {
+            var pass = "4503";
+            var limit = 4;
+            var pwd = inputPIN();
+
+            if (pwd == pass) {
+                document.write("Login...");
+            } else {
+                var j = i;
+                while (j <= 3) {
+                    document.getElementById("msgError").innerHTML = `${limit-(i+2)} attemps left`.fontcolor("red");
+                    j++;
+                }
+            }
+            i++;
+            if (i == limit) {
+                document.getElementById("txtPwd").disabled = true;
+                document.querySelector("button").disabled = true;
+                document.getElementById("msgError").innerHTML =
+                    `Your Card Blocked, <a href='javascript:void()'>Help?</a>`.fontcolor("red");
+            }
+        }
+
+        function inputPIN() {
+            var pwd = document.getElementById("txtPwd").value;
+            return pwd;
+        }
+    </script>
+    <style>
+        #pinContainer {
+            background-image: url('https://media.istockphoto.com/photos/lock-icon-cyber-security-of-digital-data-network-protection-high-picture-id1266559436?k=20&m=1266559436&s=170667a&w=0&h=4rKc0GqIVIO9-o6jpx-B4yRyfPXrxaMkV2HtKgx-6Y0=');
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 50em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="d-flex justify-content-center align-items-center" id="pinContainer">
+        <div class=" w-25 border bg-light p-3" align="center">
+            <label class="form-label">PIN</label>
+            <input type="text" id="txtPwd">
+            <button type="button" class="w-25 btn-primary" onclick="verifyPIN()">sumbit</button>
+            <div id="msgError" disabled></div>
+        </div>
+    </div>
+</body>
+
+</html>

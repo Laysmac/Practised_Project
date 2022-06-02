@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Amazon SignIn</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
+    <style>
+        .image {
+            padding: 20px;
+            width: 200px;
+            height: 100px;
+        }
+
+        .email-label {
+            font-weight: bold;
+        }
+
+        details {
+            color: rgb(96, 132, 231);
+        }
+
+        details summary {
+            margin: 0px 0px 10px;
+            font-size: 14px;
+        }
+
+
+        details dd a {
+            text-decoration: none;
+            padding-left: 15px;
+            font-size: 14px;
+        }
+
+        details summary:hover,
+        details dd a:hover,
+        footer ul li a:hover {
+            color: orange;
+            text-decoration: underline;
+        }
+
+        .child {
+            width: 400px;
+            border: 1px solid lightgray;
+            border-radius: 4px;
+            padding: 20px;
+            padding-bottom: 5px;
+        }
+
+        .child p {
+            font-size: 13px;
+        }
+
+        span a {
+            text-decoration: none;
+        }
+
+
+        .newAccount p {
+            margin: 20px 0px 10px 0px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .form-newAccount {
+            width: 400px;
+        }
+
+        .label-amazon {
+            size: 13px;
+            text-align: center;
+        }
+
+        footer {
+            border-top: 1px solid gray;
+            font-size: 13px;
+        }
+
+        footer ul {
+            padding: 0px;
+            list-style: none;
+        }
+
+        footer ul li a {
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="d-flex flex-column">
+        <div class="d-flex justify-content-center align-items-center">
+            <img src="https://pngimg.com/uploads/amazon/amazon_PNG24.png" class="image" alt="">
+        </div>
+        <div class="parent d-flex justify-content-center align-items-center"">
+            <div class=" child">
+            <form>
+                <h2 class="mb-3">Sign-In</h2>
+                <div class="mb-3">
+                    <label for="Email" class="email-label form-label">Email or mobile phone number</label>
+                    <div>
+                        <input name="Email" type="email" class="form-control">
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <button class="btn btn-warning w-100">Continue</button>
+                </div>
+            </form>
+            <p class="mb-4">By continuing, you are agree to Amazon's
+                <span><a href="javascript:void()">Conditions of Use</a></span>
+                and <span><a href="javascript:void()">Privacy Notice</a></span>
+            </p>
+            <div>
+                <details>
+                    <summary>Need Help?</summary>
+                    <dl>
+                        <dd><a href="javascript:void()">Forgot password</a></dd>
+                        <dd><a href="javascript:void()">Other issues with Sign-In</a></dd>
+                    </dl>
+                </details>
+            </div>
+        </div>
+
+    </div>
+    <div class="newAccount d-flex justify-content-center align-items-center">
+        <form class="form-newAccount">
+            <div>
+                <p>New to Amazon?</p>
+            </div>
+            <div>
+                <button class="btn btn-light w-100">Create your Amazon Account</button>
+            </div>
+        </form>
+    </div>
+    </div>
+    <footer class="mt-4 d-flex justify-content-center">
+        <div class="mt-4">
+            <ul class="d-flex justify-content-between">
+                <li><a href="javascript:void()">Conditions of Use</a></li>
+                <li><a href="javascript:void()">Privacy Notice</a></li>
+                <li><a href="javascript:void()">Help</a></li>
+            </ul>
+            <p>&copy; 1996-2022, Amazon.com, inc. or its affiliates</p>
+        </div>
+    </footer>
+</body>
+
+</html>

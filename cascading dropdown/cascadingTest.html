@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Cascading Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script>
+        var category = ["Select Movie", "Jurasic World: Dominion", "Doctor Strange: Multiverse of Madness",
+            "Top Gun: Maverick"
+        ];
+
+        var cinemaJu = ["Select Cinema", "INOX Megaplex", "Mega Bangna", "Central Bangna", "BigC Samrong"];
+        var cinemaDr = ["Select Cinema", "Siam Paragon IMAX", "Siam Square", "Central Chidlom", "Central World"];
+        var cinemaTop = ["Select Cinema", "The Mall Bangkapi", "Central Chidlom"];
+
+        var INOXdateJu = ["Thursday 9th June", "Friday 10th June", "Saturday 11th June"];
+        var MegadateJu = ["Monday 3th June", "Friday 10th June", "Saturday 11th June"];
+        var CBdateJu = ["Saturday 22th June"];
+        var BCdateJu = ["Tuesday 7th June", "Wednesday 8th June"];
+
+
+        var SiamdateDr = ["Friday 10th June", "Saturday 11th June", "Sunday 12th June"];
+        var SSdateDr = ["Friday 10th June", "Saturday 11th June"];
+        var CCdateDr = ["Monday 3th June", "Friday 10th June", "Saturday 11th June"];
+        var CwdateDr = ["Thursday 9th June", "Friday 10th June", "Saturday 11th June"];
+
+        var KPdateTop = ["Thursday 9th June", "Friday 10th June", "Saturday 11th June", "Sunday 12th June"];
+        var CCdateTop = ["Saturday 22th June"];
+
+
+        var cinema = [];
+        var date = [];
+
+
+        function loadProduct() {
+            document.getElementById("lstCinema").innerHTML = "";
+            for (var item of cinema) {
+                var option = document.createElement("option");
+                option.innerHTML = item;
+                option.value = item;
+                document.getElementById("lstCinema").appendChild(option);
+            }
+        }
+
+        function loadProduct2() {
+            document.getElementById("lstDate").innerHTML = "";
+            for (var item of date) {
+                var option = document.createElement("option");
+                option.innerHTML = item;
+                option.value = item;
+                document.getElementById("lstDate").appendChild(option);
+            }
+        }
+
+
+        function loadCategory() {
+            for (var item of category) {
+                var option = document.createElement("option");
+                option.text = item;
+                option.value = item;
+                document.getElementById("lstCategories").appendChild(option);
+            }
+        }
+
+        function categoryChanged() {
+            var categoryName = document.getElementById("lstCategories").value;
+            switch (categoryName) {
+                case "Jurasic World: Dominion":
+                    cinema = cinemaJu;
+                    loadProduct();
+                    break;
+                case "Doctor Strange: Multiverse of Madness":
+                    cinema = cinemaDr;
+                    loadProduct();
+                    break;
+                case "Top Gun: Maverick":
+                    cinema = cinemaTop;
+                    loadProduct();
+                    break;
+                default:
+                    cinema = ["Please Select Movie"];
+                    loadProduct();
+                    break;
+            }
+        }
+
+
+        function cinemaChanged() {
+            var cinema = document.getElementById("lstCinema").value;
+            switch (cinema) {
+                case "INOX Megaplex":
+                    date = INOXdateJu;
+                    loadProduct2();
+                    break;
+                case "Mega Bangna":
+                    date = MegadateJu;
+                    loadProduct2();
+                    break;
+                case "Central Bangna":
+                    date = CBdateJu;
+                    loadProduct2();
+                    break;
+                case "BigC Samrong":
+                    date = BCdateJu;
+                    loadProduct2();
+                    break;
+                case "Siam Paragon IMAX":
+                    date = SiamdateDr;
+                    loadProduct2();
+                    break;
+                case "Siam Square":
+                    date = SSdateDr;
+                    loadProduct2();
+                    break;
+                case "Central Chidlom":
+                    date = CCdateDr;
+                    loadProduct2();
+                    break;
+                case "Central World":
+                    date = CwdateDr;
+                    loadProduct2();
+                    break;
+                case "The Mall Bangkapi":
+                    date = KPdateTop;
+                    loadProduct2();
+                    break;
+                default:
+                    date = ["Please Select Cinema"];
+                    loadProduct2();
+                    break;
+            }
+        }
+
+        function bodyLoad() {
+            loadCategory();
+        }
+    </script>
+    <style>
+        select {
+            text-align: center;
+            width: 150px;
+            height: 2.3rem;
+        }
+
+        #selectContainer {
+            width: 650px;
+        }
+    </style>
+</head>
+
+<body onload="bodyLoad()"
+    style="background: url('https://i.ytimg.com/vi/esMVxvq8RD8/maxresdefault.jpg'); background-size: cover;">
+    <div class="d-flex justify-content-center align-items-center" style="height:700px;">
+        <div class="border bg-light p-2" id="selectContainer">
+            <select id="lstCategories" onchange="categoryChanged()">Select Movie</select>
+            <select id="lstCinema" onchange="cinemaChanged()">Select Cinema</select>
+            <select id="lstDate">Select Date</select>
+            <button class="btn-danger w-25 p-1 rounded-1">Book</button>
+        </div>
+    </div>
+
+</body>
+
+</html>

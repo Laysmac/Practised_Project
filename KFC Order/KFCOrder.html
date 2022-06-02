@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>KFC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
+    <script>
+        function OrderClick() {
+            document.getElementById("lblName").innerHTML = document.getElementById("txtName").value;
+            document.getElementById("lblMobile").innerHTML = document.getElementById("txtMobile").value;
+
+            var optChicken = document.getElementById("optChicken");
+            var optChicken2 = document.getElementById("optChicken2");
+
+            var optIcecream = document.getElementById("optIcecream");
+            var optWings = document.getElementById("optWings");
+
+            var mealName = "";
+            var mealCost = 0;
+
+            var addOnName = "";
+            var addOnCost = 0;
+
+            var total = 0;
+
+            if (optChicken.checked) {
+                mealCost = 450;
+                mealName = optChicken.value;
+            }
+
+            if (optChicken2.checked) {
+                mealCost = 500;
+                mealName = optChicken2.value;
+            }
+
+            if (optIcecream.checked) {
+                addOnCost = 89;
+                mealCost += addOnCost;
+                addOnName += optIcecream.value + "<br>";
+            }
+
+            if (optWings.checked) {
+                addOnCost = 149;
+                mealCost += addOnCost;
+                addOnName += optWings.value + "<br>";
+            }
+
+            total = mealCost;
+
+            document.getElementById("lblMeal").innerHTML = mealName;
+            document.getElementById("lblAddOn").innerHTML = addOnName;
+            document.getElementById("lblTotal").innerHTML = total;
+        }
+    </script>
+</head>
+
+<body class="container-fluid">
+    <header>
+        <img src="http://4.bp.blogspot.com/_9aOUxhyu9rc/SJvS-w6rHoI/AAAAAAAAAN4/ysfUCy9Knyg/S1600-R/55555.jpg"
+            width="100%" alt="">
+    </header>
+    <section>
+        <div class="accordion" id="kfcOrder">
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <button class="btn btn-danger w-100" data-bs-target="#customer" data-bs-toggle="collapse">Customer
+                        Info</button>
+                </div>
+                <div class="accordion-collapse show" id="customer" data-bs-parent="#kfcOrder">
+                    <div class="accordion-body">
+                        <dl>
+                            <dt>Customer Name</dt>
+                            <dd>
+                                <input type="text" class="form-control" id="txtName">
+                            </dd>
+                            <dt>Mobile</dt>
+                            <dd>
+                                <input type="text" class="form-control" id="txtMobile">
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <button class="btn btn-danger w-100" data-bs-target="#meal" data-bs-toggle="collapse">Select Your
+                        Meal</button>
+                </div>
+                <div class="accordion-collapse collapse" id="meal" data-bs-parent="#kfcOrder">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <img class="card-img-top"
+                                        src="https://img.freepik.com/free-photo/bucket-full-crispy-kentucky-fried-chicken-with-smoke-brown-background-selective-focus_70216-5711.jpg"
+                                        height="350">
+                                </div>
+                                <div class="card-body">
+                                    <h3>450 Baht/-</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <input type="radio" name="Meal" id="optChicken" value="OMG Chicken"
+                                        class="form-check-input"> OMG Chicken
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card">
+                                    <img class="card-img-top" src="https://i.ytimg.com/vi/YrU59kVrlxA/maxresdefault.jpg"
+                                        height="350">
+                                </div>
+                                <div class="card-body">
+                                    <h3>500 Baht/-</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <input type="radio" name="Meal" id="optChicken2" value="OMG Chicken2"
+                                        class="form-check-input"> OMG Chicken2
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <button class="btn btn-danger w-100" data-bs-target="#addOn" data-bs-toggle="collapse">Select
+                        AddOn</button>
+                </div>
+                <div class="accordion-collapse collapse" id="addOn" data-bs-parent="#kfcOrder">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <img class="card-img-top"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkk1FLC-B4lagu0GBx58K0xL2aeeeu2QaAategDDv1hy3bNLLrWhk559SoSCKgk0-V0uk&usqp=CAU"
+                                        height="350">
+                                </div>
+                                <div class="card-body">
+                                    <h3>89 Baht/-</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <input type="checkbox" id="optIcecream" value="Chocolate Icecream"
+                                        class="form-check-input"> Chocolate Icecream
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card">
+                                    <img class="card-img-top"
+                                        src="https://goohiw.com/wp-content/uploads/2020/09/review-kfc-wings-6.jpg"
+                                        height="350">
+                                </div>
+                                <div class="card-body">
+                                    <h3>149 Baht/-</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <input type="checkbox" id="optWings" value="Hot Wings" class="form-check-input"> Hot
+                                    Wings
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <button class="btn btn-danger w-100" data-bs-target="#billSummary"
+                                        data-bs-toggle="modal" onclick="OrderClick()">Place Order</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="billSummary">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Bill Summary</h2>
+                            <button class="btn btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <dl class="row">
+                                <dt class="col-4">Customer Name</dt>
+                                <dd class="col-8" id="lblName"></dd>
+                                <dt class="col-4">Mobile</dt>
+                                <dd class="col-8" id="lblMobile"></dd>
+                                <dt class="col-4">Meal Name</dt>
+                                <dd class="col-8" id="lblMeal"></dd>
+                                <dt class="col-4">AddOn Name</dt>
+                                <dd class="col-8" id="lblAddOn"></dd>
+                                <dt class="col-4">Total Amount</dt>
+                                <dd class="col-8" id="lblTotal"></dd>
+                            </dl>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
