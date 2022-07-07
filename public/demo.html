@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        $(function () {
+            function bodyload() {
+                $.ajax({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:4500/products',
+                    success: (data) => {
+                        $("div").html(data);
+                    }
+                })
+            }
+
+        })
+    </script>
+</head>
+
+<body>
+    <div></div>
+    <ol>
+
+    </ol>
+</body>
+
+</html>

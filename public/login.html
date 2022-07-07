@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login</title>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/jquery.cookie/jquery.cookie.js"></script>
+    <script>
+        $(() => {
+            $("#btnLogin").click(() => {
+                $.ajax({
+                    method: 'GET',
+                    url: 'http://localhost:4000/getusers',
+                    success: function (data) {
+                        for (var user of data) {
+                            if (user.Username == $("#Username").val()) {
+                                $("#userErr").html("User Valid").css("color", "green");
+                                if (user.Password == $("#Password").val()) {
+                                    $.cookie("username", $("#Username").val());
+                                    location.href = "shopping.html";
+                                    break;
+                                } else {
+                                    $("#pwdErr").html("Password invalid").css("color",
+                                        "red");
+                                }
+                                break;
+                            } else {
+                                $("#userErr").html("User invalid").css("color", "red");
+                            }
+                        }
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <h2>Login</h2>
+    <dl>
+        <dt>Login</dt>
+        <dd>
+            <input type="text" id="Username">
+            <span id="userErr"></span>
+        </dd>
+        <dt>Password</dt>
+        <dd>
+            <input type="password" id="Password">
+            <span id="pwdErr"></span>
+        </dd>
+    </dl>
+    <button id="btnLogin">Login</button>
+    <br><br>
+    <a href="register.html">New user?</a>
+</body>
+
+</html>

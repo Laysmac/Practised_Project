@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Register</title>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        $(() => {
+
+            $("#Username").keyup(() => {
+                $.ajax({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:4000/getusers',
+                    success: (data) => {
+                        for (var user of data) {
+                            if ($("#Username").val() == user.Username) {
+                                $("#userErr").html("Username has taken try another").css(
+                                    "color", "red");
+                                break;
+                            } else {
+                                $("#userErr").html("Available").css("color", "green");
+                            }
+                        }
+                    }
+                })
+            });
+
+            $("#Mobile").blur(() => {
+
+                $.ajax({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:4000/getusers',
+                    success: (data) => {
+                        for (var user of data) {
+                            if (user.Mobile == $("#Mobile").val()) {
+                                $("#mobileErr").html(
+                                    "This Mobile has already taken, try another").css(
+                                    "color", "red");
+                                break;
+                            } else {
+                                $("#mobileErr").html("Available").css("color", "green");
+                            }
+                        }
+                    }
+                })
+            });
+
+            $("#Email").keyup(() => {
+                $.ajax({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:4000/getusers',
+                    success: (data) => {
+                        for (var user of data) {
+                            if (user.Email == $("#Email").val()) {
+                                $("#emailErr").html("This Email has already taken").css(
+                                    "color", "red");
+                                $("#btnRegister").css("display", "none");
+                                break;
+                            } else {
+                                if ($("#Email").val() == "") {
+                                    $("#emailErr").html("Not empty").css(
+                                        "color", "red");
+                                    $("#btnRegister").css("display", "none");
+                                    break;
+                                } else {
+                                    $("#emailErr").html("Available").css("color", "green");
+                                    $("#btnRegister").css("display", "block");
+                                }
+                            }
+                        }
+                    }
+                })
+            });
+
+            $("#btnRegister").click(() => {
+                var userDetails = {
+                    Username: $("#Username").val(),
+                    Password: $("#Password").val(),
+                    Mobile: $("#Mobile").val(),
+                    Email: $("#Email").val(),
+                    City: $("#City").val(),
+                    State: $("#State").val(),
+                    Postal: $("#Postal").val(),
+                    Address: $("#Address").val(),
+                    Payment: $("#Payment").val()
+                }
+                $.ajax({
+                    method: 'POST',
+                    url: 'http://127.0.0.1:4000/registeruser',
+                    data: userDetails
+                })
+                alert("Register Successfully");
+                location.href = "login.html";
+            })
+
+        })
+    </script>
+</head>
+
+<body>
+    <h2>Register</h2>
+    <dl>
+        <dt>Username</dt>
+        <dd>
+            <input type="text" id="Username" required>
+            <span id="userErr"></span>
+        </dd>
+
+        <dt>Password</dt>
+        <dd>
+            <input type="password" id="Password" required>
+        </dd>
+        <dt>Mobile</dt>
+        <dd>
+            <input type="text" id="Mobile">
+            <span id="mobileErr"></span>
+        </dd>
+        <dt>Email</dt>
+        <dd>
+            <input type="email" id="Email" required>
+            <span id="emailErr"></span>
+        </dd>
+        <dt>City</dt>
+        <dd>
+            <select id="City" required>
+                <option value="Bkk">Bangkok</option>
+                <option value="CHK">Chiangmai</option>
+            </select>
+        </dd>
+        <dt>State</dt>
+        <dd>
+            <input type="text" id="State" required>
+        </dd>
+        <dt>Postal</dt>
+        <dd>
+            <input type="text" id="Postal" required>
+        </dd>
+        <dt>Address</dt>
+        <dd>
+            <input type="text" id="Address">
+        </dd>
+        <dt>Payment</dt>
+        <dd>
+            <select id="Payment" required>
+                <option value="cash">Cash</option>
+                <option value="CC">Credit Card</option>
+                <option value="PP">Paypal</option>
+                <option value="DC">Debit Card</option>
+            </select>
+        </dd>
+    </dl>
+    <button id="btnRegister" style="display:none">Register</button>
+    <br>
+    <a href="login.html">Already have an account?</a>
+</body>
+
+</html>

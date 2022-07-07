@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Grid</title>
+    <link rel="stylesheet" href="../node_modules/jsgrid/css/jsgrid.css">
+    <link rel="stylesheet" href="../node_modules/jsgrid/css/theme.css">
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/jsgrid/dist/jsgrid.js"></script>
+    <script>
+        $(() => {
+            window.products = [];
+
+            $.ajax({
+                method: 'GET',
+                url: 'http://127.0.0.1:4300/products',
+                success: (data) => {
+                    products = data;
+
+                    $("#grid").jsGrid({
+                        height: '90%',
+                        width: '100%',
+
+                        filtering: true,
+                        editing: true,
+                        sorting: true,
+                        paging: true,
+                        autoload: true,
+
+                        pageSize: 15,
+                        pageButtonCount: 5,
+
+                        deleteConfirm: 'Do you really want to delete the client?',
+
+                        data: products,
+
+                        fields: [{
+                                name: "Name",
+                                type: "text",
+                                width: 150
+                            },
+                            {
+                                name: "Price",
+                                type: "number",
+                                width: 50
+                            },
+                            {
+                                name: "Category",
+                                type: "text",
+                                width: 200
+                            },
+                            {
+                                name: "Stock",
+                                type: "checkbox",
+                                title: "In Stock",
+                                sorting: false
+                            },
+                            {
+                                type: "control"
+                            }
+                        ]
+                    });
+                }
+            })
+        });
+    </script>
+</head>
+
+<body>
+    <div id="grid">
+
+    </div>
+</body>
+
+</html>
